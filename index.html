@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SnapTrack</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script type="module" src="https://unpkg.com/ionicons/dist/ionicons/ionicons.esm.js" defer></script>
+  <script nomodule src="https://unpkg.com/ionicons/dist/ionicons/ionicons.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body class="page1">
+  <main>
+    <div class="container">
+      <!-- LOGO SUPPRIMÉ -->
+
+      <!-- TITRE : gradient uniquement sur "Snap" -->
+      <h1 class="title"><span class="gradient">Snap</span>Track</h1>
+      <p class="subtitle">Découvre ce que cachent tes proches</p>
+
+      <div class="cards">
+        <div class="card" tabindex="0">
+          <ion-icon name="people-outline" class="icon icon-friends"></ion-icon>
+          <div class="content">
+            <h3>Liste d’amis</h3>
+            <p>Vois tous les contacts</p>
+          </div>
+        </div>
+        <div class="card" tabindex="0">
+          <ion-icon name="shield-half-outline" class="icon icon-myeyes"></ion-icon>
+          <div class="content">
+            <h3>My Eyes Only</h3>
+            <p>Accède au contenu privé</p>
+          </div>
+        </div>
+        <div class="card" tabindex="0">
+          <ion-icon name="location-outline" class="icon icon-location"></ion-icon>
+          <div class="content">
+            <h3>Localisation</h3>
+            <p>Position exacte en temps réel</p>
+          </div>
+        </div>
+        <div class="card" tabindex="0">
+          <ion-icon name="chatbubble-ellipses-outline" class="icon icon-chat"></ion-icon>
+          <div class="content">
+            <h3>Discussions</h3>
+            <p>Messages privés</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="form" onsubmit="return false;">
+        <input type="text" id="username" placeholder="Nom d’utilisateur Snapchat" required>
+        <div class="validation-msg">Le nom doit faire au moins 3 caractères</div>
+        <button id="startBtn" type="button" disabled>Commencer</button>
+      </form>
+
+            <p class="info-line">
+        <ion-icon name="lock-closed-outline"></ion-icon> 100% anonyme •
+        <ion-icon name="flash-outline"></ion-icon> Résultats instantanés •
+        <ion-icon name="shield-checkmark-outline"></ion-icon> Aucune détection
+      </p>
+    </div>
+  </main>
+</body>
+</html>

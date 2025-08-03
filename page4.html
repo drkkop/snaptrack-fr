@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Débloquer les données – SnapTrack</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="https://unpkg.com/ionicons/dist/ionicons/ionicons.esm.js" defer></script>
+  <script nomodule src="https://unpkg.com/ionicons/dist/ionicons/ionicons.js" defer></script>
+  <style>
+    .price-card {
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(145deg, #1e1e1e, #151515);
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: inset 0 0 10px rgba(160, 102, 255, 0.4);
+      width: 100%;
+      gap: 10px;
+      backdrop-filter: blur(6px);
+      background: rgba(30, 30, 30, 0.8);
+    }
+
+    .price-detail {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price-detail .old-price {
+      text-decoration: line-through;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    .price-detail .current-price {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #ffe600;
+      text-shadow: 0 0 8px #ffe600, 0 0 16px #fff176;
+      animation: neonPulse 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonPulse {
+      from {
+        text-shadow: 0 0 8px #ffe600, 0 0 16px #fff176;
+      }
+      to {
+        text-shadow: 0 0 14px #fff200, 0 0 22px #fff9c4;
+      }
+    }
+
+    .promo-label,
+    .timer {
+      font-size: 0.95rem;
+      color: #ccc;
+      text-align: center;
+    }
+
+    .promo-label {
+      margin-top: 5px;
+      font-weight: 500;
+      color: #fff;
+      text-shadow: none;
+    }
+
+    .unlock-box .price-card p span#countdown {
+      font-weight: bold;
+      color: var(--accent-color);
+    }
+
+    .unlock-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .unlock-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1 1 400px;
+      max-width: 500px;
+    }
+
+    .price-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .price-box .price {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #FFD700;
+    }
+
+    .price-box .old-price-inline {
+      font-size: 1rem;
+      color: #777;
+      text-decoration: line-through;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body class="page4">
+  <main class="container unlock-container">
+    <h1 class="highlight">Débloquer les données</h1>
+    <p class="subtitle" id="userLine">Accès complet aux informations de @utilisateur</p>
+
+    <div class="unlock-grid">
+      <!-- Bloc gauche -->
+      <div class="unlock-box">
+        <h2>Récapitulatif</h2>
+
+        <div class="premium-card">
+          <ion-icon name="shield-half-outline" class="premium-icon"></ion-icon>
+          <strong>Accès Premium</strong>
+        </div>
+
+        <h4 class="section-label"><ion-icon name="lock-open-outline"></ion-icon> Données débloquées :</h4>
+        <ul class="unlock-list">
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Tous les amis</li>
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Tout les contenus dans My Eyes Only</li>
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Localisation en temps réel (si activée)</li>
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Toutes les discussions récupérables</li>
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Fichiers téléchargeables</li>
+        </ul>
+
+        <hr>
+
+        <div class="price-box">
+          <strong>Total</strong>
+          <span>
+            <span class="old-price-inline">4,99 €</span>
+            <span class="price">2,00 €</span>
+          </span>
+        </div>
+
+        <ul class="guarantees">
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Paiement sécurisé</li>
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Accès instantané</li>
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Garantie 48h</li>
+        </ul>
+      </div>
+
+      <!-- Bloc droit -->
+      <div class="unlock-box">
+        <div>
+          <h2><ion-icon name="card-outline" class="premium-icon"></ion-icon> Offre de bienvenue</h2>
+
+          <div class="price-card">
+  <div class="badge">-60%</div> <!-- 👈 Ajouté ici -->
+  
+  <div class="price-detail">
+    <span class="section-label">Offre actuelle :</span>
+    <div>
+      <span class="old-price">4,99 €</span>
+      <span class="current-price">2,00 €</span>
+    </div>
+  </div>
+  <p class="promo-label">🎁 Promotion exclusive de lancement !</p>
+  <p class="timer">Temps restant : <span id="countdown">03:47</span></p>
+</div>
+
+        </div>
+
+        <div>
+<a href="https://short-link.me/19TLK" class="pay-btn" target="_blank" rel="noopener noreferrer">
+  <ion-icon name="lock-closed-outline"></ion-icon> Payer 2,00 € maintenant
+</a>
+
+
+  <!-- 👇 Tu ajoutes ceci ici : -->
+  <p class="tiny-note">Accès immédiat après validation. Aucun abonnement.</p>
+
+
+</div>
+      </div>
+    </div>
+
+    <!-- Fichiers inclus -->
+    <section class="files-included">
+      <h3><ion-icon name="document-outline"></ion-icon> Fichiers téléchargeables inclus</h3>
+      <ul>
+        <li><ion-icon name="chatbubble-outline"></ion-icon> <strong>discussions.txt</strong> – Toutes les conversations privées</li>
+        <li><ion-icon name="people-outline"></ion-icon> <strong>contacts_amis.csv</strong> – Liste complète des amis</li>
+        <li><ion-icon name="lock-closed-outline"></ion-icon> <strong>my_eyes_only.zip</strong> – Tous les contenus privés</li>
+      </ul>
+    </section>
+  </main>
+
+  <div class="footer-security">
+    <div><ion-icon name="card-outline"></ion-icon> Paiement sécurisé</div>
+    <div><ion-icon name="shield-checkmark-outline"></ion-icon> SSL crypté</div>
+    <div>&copy; 2025 SnapTrack</div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const user = params.get('user') || 'utilisateur';
+    document.getElementById('userLine').textContent = `Accès complet aux informations de @${user}`;
+
+    let timer = 600;
+    const countdownEl = document.getElementById("countdown");
+    const updateTimer = () => {
+      const minutes = String(Math.floor(timer / 60)).padStart(2, '0');
+      const seconds = String(timer % 60).padStart(2, '0');
+      countdownEl.textContent = `${minutes}:${seconds}`;
+      if (timer > 0) timer--;
+    };
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
