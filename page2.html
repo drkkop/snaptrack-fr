@@ -1,66 +1,290 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SnapTrack – Analyse</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
-  <script type="module" src="https://unpkg.com/ionicons/dist/ionicons/ionicons.esm.js" defer></script>
-  <script nomodule src="https://unpkg.com/ionicons/dist/ionicons/ionicons.js" defer></script>
-  <script src="script.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #0d0d0d, #0f1a1a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: auto;
+      position: relative;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: linear-gradient(to top, #0f1a1a, transparent);
+      pointer-events: none;
+    }
+
+    .loader-container {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 0 40px rgba(0, 255, 195, 0.05);
+    }
+
+    .loader-init {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    .loader-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin: 10px 0 0;
+    }
+
+    .loader-subtitle {
+      font-size: 1rem;
+      color: #00ffc3;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 50px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00ffc3, #00d1ff);
+      transition: width 0.5s ease;
+      box-shadow: 0 0 8px #00ffc3;
+    }
+
+    body.flash {
+  box-shadow: 0 0 0 100vw rgba(255, 255, 255, 0.1) inset;
+  animation: flash-out 0.6s ease forwards;
+}
+
+@keyframes flash-out {
+  0%   { box-shadow: 0 0 0 100vw rgba(255, 255, 255, 0.12) inset; }
+  100% { box-shadow: 0 0 0 100vw rgba(255, 255, 255, 0) inset; }
+}
+
+    .progress-info {
+      font-size: 0.8rem;
+      color: #888;
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .data-card.step {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(10px);
+      opacity: 0.3;
+      transform: scale(0.98);
+      transition: all 0.4s ease;
+    }
+
+    .data-card.step.active {
+      opacity: 1;
+      transform: scale(1);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .data-card .row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .data-card .icon {
+      font-size: 22px;
+      opacity: 0.5;
+    }
+
+    .data-card.active .icon {
+      opacity: 1;
+    }
+
+    .data-card h3 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .data-card .desc {
+      font-size: 0.8rem;
+      color: #aaa;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: all 0.4s ease;
+    }
+
+    .data-card.active .desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .data-card.current {
+      border: 1px solid #00ffc3;
+      box-shadow: 0 0 10px rgba(0, 255, 195, 0.2), 0 0 20px rgba(0, 255, 195, 0.1);
+    }
+
+    .loader-tip {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #88ccff;
+      margin-top: 30px;
+    }
+
+body.fade-to-black {
+  animation: fadeToBlack 0.8s ease forwards;
+}
+
+@keyframes fadeToBlack {
+  0% {
+    filter: brightness(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    filter: brightness(0.1);
+    transform: scale(0.96);
+    opacity: 0;
+  }
+}
+
+
+
+    /* Couleurs d'icônes */
+    .data-card:nth-child(1) .icon { color: #00e0ff; }
+    .data-card:nth-child(2) .icon { color: #00ffc3; }
+    .data-card:nth-child(3) .icon { color: #ff00cc; }
+    .data-card:nth-child(4) .icon { color: #00ff95; }
+    .data-card:nth-child(5) .icon { color: #00ffa5; }
+    .data-card:nth-child(6) .icon { color: #b2ff00; }
+  </style>
 </head>
-<body class="page2">
-  <main>
-    <!-- En-tête -->
-    <div class="loader-header">
-      <div class="loader-init">
-        <ion-icon name="square"></ion-icon>
-        <ion-icon name="ellipsis-horizontal"></ion-icon>
-        <ion-icon name="square"></ion-icon>
-        <span>récolte de données…</span>
-      </div>
-      <h1 class="loader-title">
-        Analyse de <span id="userName">@utilisateur</span>
-      </h1>
-      <p class="loader-subtitle">Extraction des données</p>
+<body>
+  <main class="loader-container">
+    <div class="loader-init">
+      <ion-icon name="square"></ion-icon>
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
+      <ion-icon name="square"></ion-icon>
+      <span>récolte de données…</span>
     </div>
+    <h1 class="loader-title">Analyse de <span id="userName">@utilisateur</span></h1>
+    <p class="loader-subtitle">Extraction des données</p>
 
-    <!-- Barre de progression -->
-    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-      <div class="progress-bar-fill"></div>
-    </div>
+    <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+    <p class="progress-info" id="progressInfo">Progression : 0%</p>
 
-    <!-- Étapes -->
-    <div class="cards steps">
-      <div class="card step" tabindex="0">
-        <ion-icon name="wifi-outline" class="icon"></ion-icon>
-        <div class="content"><h3>Connexion aux serveurs Snapchat</h3></div>
+    <div class="steps-list">
+      <div class="data-card step">
+        <div class="row"><ion-icon name="wifi-outline" class="icon"></ion-icon><h3>Connexion aux serveurs Snapchat</h3></div>
+        <p class="desc">Connexion sécurisée établie</p>
       </div>
-      <div class="card step" tabindex="0">
-        <ion-icon name="shield-half-outline" class="icon"></ion-icon>
-        <div class="content"><h3>Contournement des protections</h3></div>
+      <div class="data-card step">
+        <div class="row"><ion-icon name="shield-half-outline" class="icon"></ion-icon><h3>Contournement des protections</h3></div>
+        <p class="desc">Protocoles de sécurité neutralisés</p>
       </div>
-      <div class="card step" tabindex="0">
-        <ion-icon name="search-outline" class="icon"></ion-icon>
-        <div class="content"><h3>Recherche du profil utilisateur</h3></div>
+      <div class="data-card step">
+        <div class="row"><ion-icon name="search-outline" class="icon"></ion-icon><h3>Recherche du profil utilisateur</h3></div>
+        <p class="desc">ID localisé dans l’index public</p>
       </div>
-      <div class="card step" tabindex="0">
-        <ion-icon name="download-outline" class="icon"></ion-icon>
-        <div class="content"><h3>Extraction des données privées</h3></div>
+      <div class="data-card step">
+        <div class="row"><ion-icon name="download-outline" class="icon"></ion-icon><h3>Extraction des données privées</h3></div>
+        <p class="desc">Téléchargement des paquets JSON</p>
       </div>
-      <div class="card step" tabindex="0">
-        <ion-icon name="lock-closed-outline" class="icon"></ion-icon>
-        <div class="content"><h3>Décryptage des informations</h3></div>
+      <div class="data-card step">
+        <div class="row"><ion-icon name="lock-closed-outline" class="icon"></ion-icon><h3>Décryptage des informations</h3></div>
+        <p class="desc">Données décodées avec succès</p>
       </div>
-      <div class="card step" tabindex="0">
-        <ion-icon name="checkmark-done-outline" class="icon"></ion-icon>
-        <div class="content"><h3>Finalisation</h3></div>
+      <div class="data-card step">
+        <div class="row"><ion-icon name="checkmark-done-outline" class="icon"></ion-icon><h3>Finalisation</h3></div>
+        <p class="desc">Fichiers prêts à être affichés</p>
       </div>
     </div>
 
-    <!-- Avertissement -->
     <p class="loader-tip">Ne pas fermer cette fenêtre.</p>
   </main>
+
+<script>
+  const steps = document.querySelectorAll('.data-card.step');
+  const progressBar = document.querySelector('.progress-bar-fill');
+  const progressInfo = document.getElementById('progressInfo');
+  const duration = 10000;
+  const interval = duration / steps.length;
+
+  let currentStep = 0;
+  let progress = 0;
+
+  function updateProgress() {
+    if (currentStep < steps.length) {
+      progress += 100 / steps.length;
+      progressBar.style.width = `${progress}%`;
+      progressInfo.textContent = `Progression : ${Math.round(progress)}%`;
+
+      steps.forEach((step, i) => {
+        step.classList.remove('current');
+        if (i <= currentStep) step.classList.add('active');
+      });
+
+      steps[currentStep].classList.add('current');
+      currentStep++;
+      setTimeout(updateProgress, interval);
+    } else {
+      // Transition smooth vers page 3
+      document.body.classList.add('fade-to-black');
+      setTimeout(() => {
+        window.location.href = "page3.html";
+      }, 800); // Laisse le temps à l'animation de jouer
+    }
+  }
+
+  setTimeout(updateProgress, 600);
+
+  const user = localStorage.getItem("snaptrackUsername");
+  const usernameSpan = document.getElementById("userName");
+  usernameSpan.textContent = user && user.trim().length >= 3 ? `@${user}` : "@utilisateur";
+</script>
 </body>
 </html>
+
+

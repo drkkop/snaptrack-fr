@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Débloquer les données – SnapTrack</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Fonts & Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Icons -->
   <script type="module" src="https://unpkg.com/ionicons/dist/ionicons/ionicons.esm.js" defer></script>
   <script nomodule src="https://unpkg.com/ionicons/dist/ionicons/ionicons.js" defer></script>
+
+  <!-- Inline styles spécifiques -->
   <style>
     .price-card {
       display: flex;
       flex-direction: column;
-      background: linear-gradient(145deg, #1e1e1e, #151515);
+      background: rgba(30, 30, 30, 0.8);
       padding: 20px;
       border-radius: 14px;
       box-shadow: inset 0 0 10px rgba(160, 102, 255, 0.4);
       width: 100%;
       gap: 10px;
       backdrop-filter: blur(6px);
-      background: rgba(30, 30, 30, 0.8);
     }
 
     .price-detail {
@@ -28,13 +33,13 @@
       align-items: center;
     }
 
-    .price-detail .old-price {
+    .old-price {
       text-decoration: line-through;
       color: #777;
       font-size: 0.9rem;
     }
 
-    .price-detail .current-price {
+    .current-price {
       font-size: 1.8rem;
       font-weight: 900;
       color: #ffe600;
@@ -62,12 +67,6 @@
       margin-top: 5px;
       font-weight: 500;
       color: #fff;
-      text-shadow: none;
-    }
-
-    .unlock-box .price-card p span#countdown {
-      font-weight: bold;
-      color: var(--accent-color);
     }
 
     .unlock-grid {
@@ -93,13 +92,13 @@
       margin-top: 20px;
     }
 
-    .price-box .price {
+    .price {
       font-size: 1.4rem;
       font-weight: bold;
       color: #FFD700;
     }
 
-    .price-box .old-price-inline {
+    .old-price-inline {
       font-size: 1rem;
       color: #777;
       text-decoration: line-through;
@@ -116,23 +115,19 @@
       <!-- Bloc gauche -->
       <div class="unlock-box">
         <h2>Récapitulatif</h2>
-
         <div class="premium-card">
           <ion-icon name="shield-half-outline" class="premium-icon"></ion-icon>
           <strong>Accès Premium</strong>
         </div>
-
         <h4 class="section-label"><ion-icon name="lock-open-outline"></ion-icon> Données débloquées :</h4>
         <ul class="unlock-list">
           <li><ion-icon name="checkmark-circle-outline"></ion-icon> Tous les amis</li>
-          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Tout les contenus dans My Eyes Only</li>
-          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Localisation en temps réel (si activée)</li>
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Tout le contenu My Eyes Only</li>
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Localisation en temps réel </li>
           <li><ion-icon name="checkmark-circle-outline"></ion-icon> Toutes les discussions récupérables</li>
           <li><ion-icon name="checkmark-circle-outline"></ion-icon> Fichiers téléchargeables</li>
         </ul>
-
-        <hr>
-
+        <hr />
         <div class="price-box">
           <strong>Total</strong>
           <span>
@@ -140,7 +135,6 @@
             <span class="price">2,00 €</span>
           </span>
         </div>
-
         <ul class="guarantees">
           <li><ion-icon name="checkmark-circle-outline"></ion-icon> Paiement sécurisé</li>
           <li><ion-icon name="checkmark-circle-outline"></ion-icon> Accès instantané</li>
@@ -149,48 +143,53 @@
       </div>
 
       <!-- Bloc droit -->
-      <div class="unlock-box">
-        <div>
-          <h2><ion-icon name="card-outline" class="premium-icon"></ion-icon> Offre de bienvenue</h2>
-
-          <div class="price-card">
-  <div class="badge">-60%</div> <!-- 👈 Ajouté ici -->
-  
-  <div class="price-detail">
-    <span class="section-label">Offre actuelle :</span>
-    <div>
-      <span class="old-price">4,99 €</span>
-      <span class="current-price">2,00 €</span>
-    </div>
+<div class="offer-box">
+  <div class="offer-header">
+    <span class="offer-label">Offre actuelle</span>
+    <span class="badge-discount">-60%</span>
   </div>
-  <p class="promo-label">🎁 Promotion exclusive de lancement !</p>
-  <p class="timer">Temps restant : <span id="countdown">03:47</span></p>
+
+  <div class="price-display">
+    <span class="old">4,99 €</span>
+    <span class="new">2,00 €</span>
+  </div>
+
+  <div class="offer-countdown">
+    ⏳ Temps restant : <span id="countdown">09:47</span>
+  </div>
 </div>
+
 
         </div>
-
         <div>
-<a href="https://short-link.me/19TLK" class="pay-btn" target="_blank" rel="noopener noreferrer">
-  <ion-icon name="lock-closed-outline"></ion-icon> Payer 2,00 € maintenant
-</a>
-
-
-  <!-- 👇 Tu ajoutes ceci ici : -->
-  <p class="tiny-note">Accès immédiat après validation. Aucun abonnement.</p>
-
-
-</div>
+          <a href="https://short-link.me/19TLK" class="pay-btn" target="_blank" rel="noopener noreferrer">
+            <ion-icon name="lock-closed-outline"></ion-icon> Payer 2,00 € maintenant
+          </a>
+          <p class="tiny-note">Accès immédiat après validation. Aucun abonnement.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Fichiers inclus -->
     <section class="files-included">
-      <h3><ion-icon name="document-outline"></ion-icon> Fichiers téléchargeables inclus</h3>
-      <ul>
-        <li><ion-icon name="chatbubble-outline"></ion-icon> <strong>discussions.txt</strong> – Toutes les conversations privées</li>
-        <li><ion-icon name="people-outline"></ion-icon> <strong>contacts_amis.csv</strong> – Liste complète des amis</li>
-        <li><ion-icon name="lock-closed-outline"></ion-icon> <strong>my_eyes_only.zip</strong> – Tous les contenus privés</li>
-      </ul>
+      <h3><ion-icon name="document-outline"></ion-icon> Fichiers téléchargeables </h3>
+     <ul>
+  <li>
+    <ion-icon name="chatbubble-outline"></ion-icon>
+    <strong>discussions.txt</strong>
+    <span>– Toutes les conversations privées</span>
+  </li>
+  <li>
+    <ion-icon name="people-outline"></ion-icon>
+    <strong>contacts_amis.csv</strong>
+    <span>– Liste complète des amis</span>
+  </li>
+  <li>
+    <ion-icon name="lock-closed-outline"></ion-icon>
+    <strong>my_eyes_only.zip</strong>
+    <span>– Tous les contenus privés</span>
+  </li>
+</ul>
+
     </section>
   </main>
 

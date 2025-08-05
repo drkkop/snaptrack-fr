@@ -1,86 +1,320 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SnapTrack – Résultats</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <script type="module" src="https://unpkg.com/ionicons/dist/ionicons/ionicons.esm.js" defer></script>
   <script nomodule src="https://unpkg.com/ionicons/dist/ionicons/ionicons.js" defer></script>
-  <script src="script.js" defer></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f0f0f;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    .title3 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      text-align: center;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #f0c, #0ff, #f0c);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 2s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% }
+      100% { background-position: 200% }
+    }
+
+    .subtitle3 {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      justify-items: center;
+      margin-bottom: 40px;
+    }
+
+    .data-card {
+      background: #1b1b1b;
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      max-width: 160px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .data-card ion-icon {
+      font-size: 22px;
+      align-self: flex-start;
+      opacity: 0.9;
+      filter: drop-shadow(0 0 6px currentColor);
+    }
+
+    .data-card:nth-child(1) ion-icon { color: #00bfff; }
+    .data-card:nth-child(2) ion-icon { color: #a66bff; }
+    .data-card:nth-child(3) ion-icon { color: #ffae00; }
+    .data-card:nth-child(4) ion-icon { color: #ff4d6d; }
+
+    .data-card p {
+      margin: 0;
+      color: white;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .data-card .blurred {
+      filter: blur(4px);
+      color: #ccc;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .premium-section {
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .premium-lux {
+      background: linear-gradient(135deg, #ffe259, #f6b800);
+      border: none;
+      border-radius: 18px;
+      padding: 28px 20px;
+      text-align: center;
+      color: #000;
+      box-shadow: 0 4px 24px rgba(255, 200, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .premium-lux h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 12px 0 6px;
+      letter-spacing: 0.4px;
+      color: #000;
+    }
+
+    .premium-lux p {
+      font-size: 0.9rem;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    .premium-icon {
+      font-size: 24px;
+      color: #000;
+      opacity: 0.85;
+    }
+
+    .neon-btn {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+      transition: 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .neon-btn:hover {
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .data-list {
+      background: linear-gradient(135deg, #141414, #1a1a1a);
+      border-radius: 20px;
+      padding: 28px 24px;
+      margin: 36px 0;
+      box-shadow: 0 0 24px rgba(255, 255, 255, 0.06);
+      transition: all 0.3s ease;
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    .data-list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .data-list-header h3 ion-icon {
+      filter: drop-shadow(0 0 4px currentColor);
+    }
+
+    .data-list ul {
+      padding: 0;
+      list-style: none;
+    }
+
+    .friends-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      filter: blur(2px);
+      font-size: 0.95rem;
+      color: #ddd;
+    }
+
+    .badge-small {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      background: #2a2a2a;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-weight: 500;
+      box-shadow: inset 0 0 4px rgba(255,255,255,0.1);
+    }
+
+    .badge-number.blur-number {
+      filter: blur(2px);
+      opacity: 0.6;
+    }
+
+    .badge-small {
+      background: #ff4d6d;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: 8px;
+      color: white;
+      margin-left: 8px;
+    }
+
+    .badge-small.purple {
+      background: #a66bff;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .two-column li {
+      filter: blur(2px);
+    }
+
+    .results-footer {
+      text-align: center;
+      color: #888;
+      font-size: 0.8rem;
+      margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 420px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body class="page3">
   <main>
     <div class="container">
+      <h1 class="title3">Données de <span class="gradient" id="userName">@utilisateur</span></h1>
+      <p class="subtitle3">Informations extraites avec succès</p>
 
-      <!-- TITRE DYNAMIQUE -->
-      <h1 class="title3 reveal-block">
-        Données de <span id="userName" class="gradient">@utilisateur</span>
-      </h1>
-      <p class="subtitle3 reveal-block">Informations extraites avec succès</p>
-
-      <!-- Aperçu rapide flouté et icônes colorées -->
-      <div class="overview-cards reveal-flip">
-        <div class="overview-card" data-type="friends">
-          <ion-icon name="people-outline" class="icon neon"></ion-icon>
-          <span class="label">Amis</span>
-          <span class="value">189</span>
+      <div class="data-grid">
+        <div class="data-card">
+          <ion-icon name="people-outline"></ion-icon>
+          <p>Amis</p>
+          <p class="blurred">••••</p>
         </div>
-        <div class="overview-card" data-type="myeyes">
-          <ion-icon name="shield-half-outline" class="icon neon"></ion-icon>
-          <span class="label">My Eyes Only</span>
-          <span class="value">85</span>
+        <div class="data-card">
+          <ion-icon name="shield-half-outline"></ion-icon>
+          <p>My Eyes Only</p>
+          <p class="blurred">••••</p>
         </div>
-        <div class="overview-card" data-type="snaps">
-          <ion-icon name="camera-outline" class="icon neon"></ion-icon>
-          <span class="label">Snaps</span>
-          <span class="value">2 360</span>
+        <div class="data-card">
+          <ion-icon name="camera-outline"></ion-icon>
+          <p>Snaps</p>
+          <p class="blurred">••••</p>
         </div>
-        <div class="overview-card" data-type="location">
-          <ion-icon name="location-outline" class="icon neon"></ion-icon>
-          <span class="label">Localisation</span>
-          <span class="value">En cours…</span>
+        <div class="data-card">
+          <ion-icon name="location-outline"></ion-icon>
+          <p>Localisation</p>
+          <p class="blurred">••••</p>
         </div>
       </div>
 
-      <!-- Section payante avec gradient et ombre -->
-      <section class="premium-section gradient-bg shadow reveal-block">
+      <section class="premium-section premium-lux">
         <ion-icon name="card-outline" class="premium-icon"></ion-icon>
         <h2>Voir toutes les données</h2>
-        <p>Pour avoir accès à toutes les données.</p>
-       <button id="unlockBtn" class="unlock-btn white-text">
-      <ion-icon name="lock-open-outline"></ion-icon>
-        Débloquer pour 2 €
-      </button>
+        <p>Accédez à l'ensemble des informations extraites.</p>
+        <a id="unlockBtn" class="unlock-btn neon-btn">
+          <ion-icon name="lock-open-outline"></ion-icon>
+          Débloquer pour 2 €
+        </a>
       </section>
 
-      <!-- Détail des listes -->
-      <section class="data-list reveal-block">
-        <h3>
-          <ion-icon name="people-outline" class="neon"></ion-icon>
-          Liste d’amis
-          <span class="badge">
-            <span class="badge-number">3</span> affichés /
-            <span class="badge-number blur-number">189</span> total
-          </span>
-        </h3>
+      <section class="data-list">
+        <div class="data-list-header">
+          <h3><ion-icon name="people-outline"></ion-icon> Liste d’amis</h3>
+          <span class="badge"><span class="badge-number">3</span> affichés / <span class="badge-number blur-number">189</span> total</span>
+        </div>
         <ul class="friends-list">
           <li>myriem.al7 <span class="badge-small">+2 snaps</span></li>
-          <li>marinslp   <span class="badge-small">+4 snaps</span></li>
-          <li>tristan_vel<span class="badge-small">+1 snap</span></li>
+          <li>marinslp <span class="badge-small purple">+4 snaps</span></li>
+          <li>tristan_vel <span class="badge-small">+1 snap</span></li>
         </ul>
       </section>
 
-      <section class="data-list reveal-block">
-        <h3>
-          <ion-icon name="shield-half-outline" class="neon"></ion-icon>
-          My Eyes Only
-          <span class="badge">
-            <span class="badge-number">4</span> éléments /
-            <span class="badge-number blur-number">59</span> total
-          </span>
-        </h3>
+      <section class="data-list">
+        <div class="data-list-header">
+          <h3><ion-icon name="shield-half-outline"></ion-icon> My Eyes Only</h3>
+          <span class="badge"><span class="badge-number">4</span> éléments / <span class="badge-number blur-number">59</span> total</span>
+        </div>
         <ul class="two-column">
           <li>Photo privée #1</li>
           <li>Vidéo secrète #1</li>
@@ -89,27 +323,36 @@
         </ul>
       </section>
 
-      <section class="data-list reveal-block">
-        <h3>
-          <ion-icon name="location-outline" class="neon"></ion-icon>
-          Localisation exacte
-          <span class="badge">
-            <span class="badge-number">Temps réel</span>
-          </span>
-        </h3>
+      <section class="data-list">
+        <div class="data-list-header">
+          <h3><ion-icon name="location-outline"></ion-icon> Localisation exacte</h3>
+          <span class="badge">Temps réel</span>
+        </div>
         <ul>
-          <li>Position actuelle</li>
-          <li>12 Rue de la Paix, Paris</li>
-          <li>📍 Lat : 48.8566, Lng : 2.3522</li>
-          <li>🚗 En déplacement</li>
+          <li style="filter: blur(2px);">Position actuelle</li>
+          <li style="filter: blur(2px);">12 Rue de la Paix, Paris</li>
+          <li style="filter: blur(2px);">📍 Lat : 48.8566, Lng : 2.3522</li>
+          <li style="filter: blur(2px);">🚗 En déplacement</li>
         </ul>
       </section>
 
-      <footer class="results-footer reveal-block">
-        <p>Paiement sécurisé • Accès instantané • support 24/24</p>
+       <footer class="results-footer">
+        <p>Paiement sécurisé • Accès instantané • Support 24/24</p>
       </footer>
-
     </div>
   </main>
+
+  <script>
+    const user = localStorage.getItem("snaptrackUsername");
+    const userNameEl = document.getElementById("userName");
+
+    if (user && user.trim().length >= 3) {
+      userNameEl.textContent = `@${user}`;
+      document.getElementById("unlockBtn").href = `page4.html?user=${encodeURIComponent(user)}`;
+    } else {
+      userNameEl.textContent = "@utilisateur";
+      document.getElementById("unlockBtn").href = "page4.html";
+    }
+  </script>
 </body>
 </html>
