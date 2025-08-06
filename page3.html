@@ -101,6 +101,7 @@
       font-weight: 600;
       font-size: 0.9rem;
       margin-top: 4px;
+      opacity: 1;
     }
 
     .premium-section {
@@ -197,14 +198,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 6px 0;
-      filter: blur(2px);
-      font-size: 0.95rem;
-      color: #ddd;
+      filter: blur(6px) brightness(0.9) contrast(0.8);
+      opacity: 0.85;
     }
 
-    .badge-small {
-      margin-left: auto;
-      margin-right: 0;
+    .two-column li,
+    .data-list ul li {
+      filter: blur(6px) brightness(0.9) contrast(0.8);
+      opacity: 0.85;
     }
 
     .badge {
@@ -218,7 +219,7 @@
     }
 
     .badge-number.blur-number {
-      filter: blur(2px);
+      filter: blur(6px);
       opacity: 0.6;
     }
 
@@ -228,7 +229,7 @@
       font-size: 0.75rem;
       border-radius: 8px;
       color: white;
-      margin-left: 8px;
+      margin-left: auto;
     }
 
     .badge-small.purple {
@@ -239,10 +240,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-    }
-
-    .two-column li {
-      filter: blur(2px);
     }
 
     .results-footer {
@@ -313,14 +310,9 @@
       <section class="data-list">
         <div class="data-list-header">
           <h3><ion-icon name="shield-half-outline"></ion-icon> My Eyes Only</h3>
-          <span class="badge"><span class="badge-number">4</span> éléments / <span class="badge-number blur-number">59</span> total</span>
+          <span class="badge"><span class="badge-number">2</span> affichés / <span class="badge-number blur-number">59</span> total</span>
         </div>
-        <ul class="two-column">
-          <li>Photo privée #1</li>
-          <li>Vidéo secrète #1</li>
-          <li>Photo privée #2</li>
-          <li>Vidéo secrète #2</li>
-        </ul>
+        <div class="data-grid" id="my-eyes-only"></div>
       </section>
 
       <section class="data-list">
@@ -329,14 +321,14 @@
           <span class="badge">Temps réel</span>
         </div>
         <ul>
-          <li style="filter: blur(2px);">Position actuelle</li>
-          <li style="filter: blur(2px);">12 Rue de la Paix, Paris</li>
-          <li style="filter: blur(2px);">📍 Lat : 48.8566, Lng : 2.3522</li>
-          <li style="filter: blur(2px);">🚗 En déplacement</li>
+          <li class="strong-blur">Position actuelle</li>
+          <li class="strong-blur">12 Rue de la Paix, Paris</li>
+          <li class="strong-blur">📍 Lat : 48.8566, Lng : 2.3522</li>
+          <li class="strong-blur">🚗 En déplacement</li>
         </ul>
       </section>
 
-       <footer class="results-footer">
+      <footer class="results-footer">
         <p>Paiement sécurisé • Accès instantané • Support 24/24</p>
       </footer>
     </div>
@@ -353,6 +345,77 @@
       userNameEl.textContent = "@utilisateur";
       document.getElementById("unlockBtn").href = "page4.html";
     }
+
+    // Affichage des 2 images floutées My Eyes Only
+    const totalImages = 29;
+
+    function getTwoRandomIndices(max) {
+      const index1 = Math.floor(Math.random() * max) + 1;
+      let index2;
+      do {
+        index2 = Math.floor(Math.random() * max) + 1;
+      } while (index2 === index1);
+      return [index1, index2];
+    }
+
+    function createBlurredImage(index) {
+  const wrapper = document.createElement("div");
+  wrapper.style.position = "relative";
+  wrapper.style.width = "100%";
+  wrapper.style.aspectRatio = "1 / 2"; // carré
+  wrapper.style.overflow = "hidden";
+  wrapper.style.borderRadius = "12px";
+
+  const img = document.createElement("img");
+  img.src = `images/myeyes/img${index}.jpg`;
+  img.alt = `Image ${index}`;
+  img.style.width = "100%";
+  img.style.height = "100%";
+  img.style.objectFit = "cover";
+  img.style.filter = "blur(8px)";
+
+  wrapper.appendChild(img);
+  return wrapper;
+}
+
+
+    function insertImagesForUser() {
+      const container = document.getElementById("my-eyes-only");
+      if (!user || !container) return;
+
+      let selectedImages = localStorage.getItem(`${user}_myeyes`);
+      if (selectedImages) {
+        selectedImages = JSON.parse(selectedImages);
+      } else {
+        selectedImages = getTwoRandomIndices(totalImages);
+        localStorage.setItem(`${user}_myeyes`, JSON.stringify(selectedImages));
+      }
+
+      selectedImages.forEach(index => {
+        container.appendChild(createBlurredImage(index));
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", insertImagesForUser);
   </script>
+
+  <!-- Statcounter -->
+  <script type="text/javascript">
+    var sc_project = 13157006;
+    var sc_invisible = 1;
+    var sc_security = "ac569ff4";
+  </script>
+  <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript>
+    <div class="statcounter">
+      <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
+        <img class="statcounter"
+          src="https://c.statcounter.com/13157006/0/ac569ff4/1/" alt="Web Analytics"
+          referrerPolicy="no-referrer-when-downgrade">
+      </a>
+    </div>
+  </noscript>
+
 </body>
 </html>

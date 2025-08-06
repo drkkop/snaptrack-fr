@@ -245,6 +245,8 @@ body.fade-to-black {
     <p class="loader-tip">Ne pas fermer cette fenêtre.</p>
   </main>
 
+<!-- ... tout ton code est inchangé jusqu'à la fin ... -->
+
 <script>
   const steps = document.querySelectorAll('.data-card.step');
   const progressBar = document.querySelector('.progress-bar-fill');
@@ -274,7 +276,7 @@ body.fade-to-black {
       document.body.classList.add('fade-to-black');
       setTimeout(() => {
         window.location.href = "page3.html";
-      }, 800); // Laisse le temps à l'animation de jouer
+      }, 800);
     }
   }
 
@@ -284,7 +286,21 @@ body.fade-to-black {
   const usernameSpan = document.getElementById("userName");
   usernameSpan.textContent = user && user.trim().length >= 3 ? `@${user}` : "@utilisateur";
 </script>
+
+<!-- Statcounter -->
+<!-- Default Statcounter code for snaptrack https://snaptrack.fr/ -->
+<script type="text/javascript">
+var sc_project=13157006; 
+var sc_invisible=1; 
+var sc_security="ac569ff4"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js" async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/13157006/0/ac569ff4/1/" alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
 </body>
 </html>
-
-

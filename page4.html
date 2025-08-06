@@ -104,12 +104,28 @@
       text-decoration: line-through;
       margin-right: 8px;
     }
+
+    /* Dégradé animé */
+    .gradient {
+      background: linear-gradient(90deg, #f0c, #0ff, #f0c);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 2s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0%; }
+      100% { background-position: 200%; }
+    }
   </style>
 </head>
 <body class="page4">
   <main class="container unlock-container">
     <h1 class="highlight">Débloquer les données</h1>
-    <p class="subtitle" id="userLine">Accès complet aux informations de @utilisateur</p>
+  <p class="subtitle" id="userLine">
+  Accès complet aux informations de <span class="gradient" id="userName">@utilisateur</span>
+</p>
 
     <div class="unlock-grid">
       <!-- Bloc gauche -->
@@ -123,7 +139,7 @@
         <ul class="unlock-list">
           <li><ion-icon name="checkmark-circle-outline"></ion-icon> Tous les amis</li>
           <li><ion-icon name="checkmark-circle-outline"></ion-icon> Tout le contenu My Eyes Only</li>
-          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Localisation en temps réel </li>
+          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Localisation en temps réel</li>
           <li><ion-icon name="checkmark-circle-outline"></ion-icon> Toutes les discussions récupérables</li>
           <li><ion-icon name="checkmark-circle-outline"></ion-icon> Fichiers téléchargeables</li>
         </ul>
@@ -143,23 +159,17 @@
       </div>
 
       <!-- Bloc droit -->
-<div class="offer-box">
-  <div class="offer-header">
-    <span class="offer-label">Offre actuelle</span>
-    <span class="badge-discount">-60%</span>
-  </div>
-
-  <div class="price-display">
-    <span class="old">4,99 €</span>
-    <span class="new">2,00 €</span>
-  </div>
-
-  <div class="offer-countdown">
-    ⏳ Temps restant : <span id="countdown">09:47</span>
-  </div>
-</div>
-
-
+      <div class="offer-box">
+        <div class="offer-header">
+          <span class="offer-label">Offre actuelle</span>
+          <span class="badge-discount">-60%</span>
+        </div>
+        <div class="price-display">
+          <span class="old">4,99 €</span>
+          <span class="new">2,00 €</span>
+        </div>
+        <div class="offer-countdown">
+          ⏳ Temps restant : <span id="countdown">09:47</span>
         </div>
         <div>
           <a href="https://short-link.me/19TLK" class="pay-btn" target="_blank" rel="noopener noreferrer">
@@ -172,24 +182,20 @@
 
     <section class="files-included">
       <h3><ion-icon name="document-outline"></ion-icon> Fichiers téléchargeables </h3>
-     <ul>
-  <li>
-    <ion-icon name="chatbubble-outline"></ion-icon>
-    <strong>discussions.txt</strong>
-    <span>– Toutes les conversations privées</span>
-  </li>
-  <li>
-    <ion-icon name="people-outline"></ion-icon>
-    <strong>contacts_amis.csv</strong>
-    <span>– Liste complète des amis</span>
-  </li>
-  <li>
-    <ion-icon name="lock-closed-outline"></ion-icon>
-    <strong>my_eyes_only.zip</strong>
-    <span>– Tous les contenus privés</span>
-  </li>
-</ul>
-
+      <ul>
+        <li><ion-icon name="chatbubble-outline"></ion-icon>
+          <strong>discussions.txt</strong>
+          <span>– Toutes les conversations privées</span>
+        </li>
+        <li><ion-icon name="people-outline"></ion-icon>
+          <strong>contacts_amis.csv</strong>
+          <span>– Liste complète des amis</span>
+        </li>
+        <li><ion-icon name="lock-closed-outline"></ion-icon>
+          <strong>my_eyes_only.zip</strong>
+          <span>– Tous les contenus privés</span>
+        </li>
+      </ul>
     </section>
   </main>
 
@@ -199,10 +205,10 @@
     <div>&copy; 2025 SnapTrack</div>
   </div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const user = params.get('user') || 'utilisateur';
-    document.getElementById('userLine').textContent = `Accès complet aux informations de @${user}`;
+    <script>
+ const params = new URLSearchParams(window.location.search);
+const user = params.get('user') || 'utilisateur';
+document.getElementById('userName').textContent = `@${user}`;
 
     let timer = 600;
     const countdownEl = document.getElementById("countdown");
@@ -214,5 +220,27 @@
     };
     setInterval(updateTimer, 1000);
   </script>
+
+  <!-- Statcounter -->
+  <!-- Default Statcounter code for snaptrack https://snaptrack.fr/ -->
+  <script type="text/javascript">
+    var sc_project = 13157006;
+    var sc_invisible = 1;
+    var sc_security = "ac569ff4";
+  </script>
+  <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript>
+    <div class="statcounter">
+      <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
+        <img class="statcounter"
+          src="https://c.statcounter.com/13157006/0/ac569ff4/1/"
+          alt="Web Analytics"
+          referrerPolicy="no-referrer-when-downgrade" />
+      </a>
+    </div>
+  </noscript>
+  <!-- End of Statcounter Code -->
+
 </body>
 </html>

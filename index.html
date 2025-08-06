@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>SnapTrack</title>
 
   <!-- Fonts -->
@@ -43,7 +43,7 @@
       font-size: 2rem;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 12px;
+      margin: 40px 0 12px;
     }
 
     h1.title .gradient {
@@ -60,13 +60,14 @@
     .cards {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 22px;
+      margin-bottom: 40px;
     }
 
     .card {
       background: #1a1a1a;
       border-radius: 16px;
-      padding: 18px 20px;
+      padding: 20px;
       display: flex;
       align-items: center;
       gap: 14px;
@@ -159,27 +160,93 @@
       text-align: center;
       color: #aaa;
       font-size: 0.85rem;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
-    .badges {
-      margin-top: 28px;
+    .how {
+      background: #1a1a1a;
+      border-radius: 14px;
+      padding: 28px 22px;
+      margin-top: 80px;
+      box-shadow: 0 0 14px #ffc300;
+    }
+
+    .how h3 {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 26px;
+      background: linear-gradient(45deg, #ff00ff, #ffc300);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      background: #ff00ff;
+      color: white;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      text-align: center;
+      line-height: 26px;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 6px #ff00ff55;
+    }
+
+    .text {
+      font-size: 0.9rem;
+      color: #ccc;
+      line-height: 1.4;
+    }
+
+    .text strong {
+      color: white;
+    }
+
+    .rating {
+      text-align: center;
+      font-size: 0.9rem;
+      margin: 20px 0 10px;
+    }
+
+    .rating .stars {
+      color: #ffc300;
+    }
+
+    .rating strong {
+      color: #ffc300;
+    }
+
+    .rating .text-white {
+      color: white;
+    }
+
+    .footer-links {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #666;
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 6px;
-      font-size: 0.85rem;
-      color: #999;
     }
 
-    .badges ion-icon {
-      margin-right: 6px;
-      vertical-align: middle;
+    .footer-links a {
+      color: #888;
+      text-decoration: underline;
+      transition: color 0.2s ease;
     }
 
-    .badges p {
-      display: flex;
-      align-items: center;
+    .footer-links a:hover {
+      color: #ffc300;
     }
   </style>
 </head>
@@ -197,7 +264,6 @@
             <p>Vois tous les contacts</p>
           </div>
         </div>
-
         <div class="card">
           <ion-icon name="shield-half-outline" class="icon-myeyes"></ion-icon>
           <div class="content">
@@ -205,7 +271,6 @@
             <p>Accède au contenu privé</p>
           </div>
         </div>
-
         <div class="card">
           <ion-icon name="location-outline" class="icon-location"></ion-icon>
           <div class="content">
@@ -213,7 +278,6 @@
             <p>Position exacte en temps réel</p>
           </div>
         </div>
-
         <div class="card">
           <ion-icon name="chatbubble-ellipses-outline" class="icon-chat"></ion-icon>
           <div class="content">
@@ -232,10 +296,23 @@
         <p class="info-msg">Analyse en moins de 10 secondes</p>
       </form>
 
-      <div class="badges">
-        <p><ion-icon name="lock-closed-outline"></ion-icon> 100% anonyme</p>
-        <p><ion-icon name="flash-outline"></ion-icon> Résultats instantanés</p>
-        <p><ion-icon name="shield-checkmark-outline"></ion-icon> Aucune détection</p>
+      <div class="how">
+        <h3>Comment ça marche ?</h3>
+        <div class="step"><div class="badge">1</div><div class="text"><strong>Tu entres un pseudo Snapchat</strong></div></div>
+        <div class="step"><div class="badge">2</div><div class="text"><strong>SnapTrack fais une extraction</strong></div></div>
+        <div class="step"><div class="badge">3</div><div class="text"><strong>On analyse les données privées disponibles</strong></div></div>
+        <div class="step"><div class="badge">4</div><div class="text"><strong>Tu accèdes à la page finale avec les données</strong></div></div>
+      </div>
+
+      <div class="rating">
+        <span class="stars">⭐️⭐️⭐️⭐️⭐️</span>
+        <strong>4.8/5</strong>
+        <span class="text-white">sur 139 avis utilisateurs conquis</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="politique.html">Politique de confidentialité</a>
+        <span>© 2025 SnapTrack</span>
       </div>
     </div>
   </main>
@@ -244,7 +321,6 @@
     function saveUsername() {
       const input = document.getElementById("username");
       const username = input.value.trim();
-
       if (username.length >= 3) {
         localStorage.setItem("snaptrackUsername", username);
         window.location.href = "page2.html";
@@ -253,5 +329,23 @@
       }
     }
   </script>
+
+  <!-- Statcounter -->
+  <script type="text/javascript">
+    var sc_project = 13157006;
+    var sc_invisible = 1;
+    var sc_security = "ac569ff4";
+  </script>
+  <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript>
+    <div class="statcounter">
+      <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
+        <img class="statcounter"
+          src="https://c.statcounter.com/13157006/0/ac569ff4/1/" alt="Web Analytics"
+          referrerPolicy="no-referrer-when-downgrade">
+      </a>
+    </div>
+  </noscript>
 </body>
 </html>
